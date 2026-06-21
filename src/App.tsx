@@ -33,6 +33,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/item/:id" element={<ItemDetails />} />
                 <Route path="/verify" element={<Verify />} />
+                <Route path="/verify.html" element={<Verify />} />
               </Routes>
             </div>
             <FloatingCartBar />
