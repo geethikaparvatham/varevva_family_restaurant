@@ -152,6 +152,12 @@ const CheckoutModal = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid 10-digit mobile number starting with 9, 8, 7, or 6.");
+      return;
+    }
+
     if (diningPreference === 'delivery' && !isLocationVerified) {
       alert("Please verify your location first by clicking 'Detect Distance'.");
       return;
@@ -277,10 +283,10 @@ const CheckoutModal = () => {
                   type="tel"
                   id="cust-phone"
                   placeholder="Enter 10-digit mobile number"
-                  pattern="[0-9]{10}"
-                  title="Please enter a valid 10-digit mobile number"
+                  pattern="[6-9][0-9]{9}"
+                  title="Please enter a valid 10-digit mobile number starting with 9, 8, 7, or 6"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                   required
                 />
               </div>
