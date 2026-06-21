@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 
 const VAREVVA_COORDS = { lat: 17.5700914, lng: 78.9440528 };
-const PRODUCTION_URL = 'https://varevva-family-restaurant.vercel.app';
+const PRODUCTION_URL = 'https://restaurant-blush-six.vercel.app';
 
 function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   const toRad = (x: number) => x * (Math.PI / 180);
