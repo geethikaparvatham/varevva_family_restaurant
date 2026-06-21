@@ -221,6 +221,7 @@ const CheckoutModal = () => {
     const finalWhatsappUrl = `https://wa.me/916302019925?text=${encodeURIComponent(text)}`;
     setWhatsappUrl(finalWhatsappUrl);
     setOrderGenerated(true);
+    clearCart(); // Clear cart immediately upon successful generation of order
   };
 
   const handleFinish = () => {
@@ -409,7 +410,7 @@ const CheckoutModal = () => {
             </a>
             
             <button className="btn-success-done" onClick={handleFinish} style={{ width: '100%' }}>
-              Done & Clear Cart
+              Done
             </button>
           </div>
         )}
