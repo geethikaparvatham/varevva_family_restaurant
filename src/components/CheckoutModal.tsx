@@ -51,6 +51,7 @@ const CheckoutModal = () => {
   const [orderGenerated, setOrderGenerated] = useState(false);
   const [generatedToken, setGeneratedToken] = useState('');
   const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [verificationUrl, setVerificationUrl] = useState('');
 
   const cartItems = Object.values(cart);
 
@@ -66,6 +67,7 @@ const CheckoutModal = () => {
       setCalculatedDistance(null);
       setLocationStatusText('Not verified yet');
       setLocationStatusColor('var(--text-muted)');
+      setVerificationUrl('');
     }
   }, [isCheckoutOpen]);
 
@@ -189,7 +191,8 @@ const CheckoutModal = () => {
     }
 
     const encodedBill = base64UrlSafeEncode(verificationPayload);
-    const verificationUrl = `${window.location.origin}/verify.html?o=${encodedBill}`;
+    const verUrl = `${window.location.origin}/verify?o=${encodedBill}`;
+    setVerificationUrl(verUrl);
 
     // Format WhatsApp Message
     let text = `*Order Token: ${token}*\n`;
@@ -212,7 +215,7 @@ const CheckoutModal = () => {
     });
     text += `-------------------------\n`;
     text += `*Total Amount:* ₹${cartTotal}\n\n`;
-    text += `*Verify Original Price & Bill:*\n${verificationUrl}\n\n`;
+    text += `*Verify Original Price & Bill:*\n${verUrl}\n\n`;
     text += `Please confirm my order. Thank you!`;
 
     const finalWhatsappUrl = `https://wa.me/916302019925?text=${encodeURIComponent(text)}`;
@@ -379,6 +382,18 @@ const CheckoutModal = () => {
             <div className="token-box">
               <div className="token-title">Your Order Token</div>
               <div className="token-number">{generatedToken}</div>
+            </div>
+            
+            <div style={{ margin: '15px 0', textAlign: 'center', fontSize: '0.88rem' }}>
+              <span style={{ color: 'var(--text-muted)' }}>Digital Bill Link: </span>
+              <a 
+                href={verificationUrl}
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ color: 'var(--primary-color)', fontWeight: 600, textDecoration: 'underline' }}
+              >
+                Click to Verify Bill
+              </a>
             </div>
             
             <a
